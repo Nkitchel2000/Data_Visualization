@@ -8,7 +8,7 @@
   "data": [
     {
       "name": "source",
-      "url": "ScatterPlot_Histogram/drink_consumption.json",
+      "url": "drink_consumption.json",
       "transform": [
         {
           "type": "filter",

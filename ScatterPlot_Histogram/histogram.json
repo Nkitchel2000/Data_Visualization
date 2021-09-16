@@ -22,7 +22,7 @@
   "data": [
     {
       "name": "table",
-      "url": "ScatterPlot_Histogram/drink_consumption.json",
+      "url": "drink_consumption.json",
       "transform": [
         {
           "type": "extent", "field": "total_litres_of_pure_alcohol",
