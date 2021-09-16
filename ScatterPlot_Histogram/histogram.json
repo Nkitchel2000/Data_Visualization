@@ -1,0 +1,123 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "description": "A histogram of film ratings, modified to include null values.",
+  "width": 470,
+  "height": 474,
+  "autosize": {"type": "fit", "resize": true},
+
+  "signals": [
+    {
+      "name": "binCount",
+      "update": "(bins.stop - bins.start) / bins.step"
+    },
+    {
+      "name": "nullGap", "value": 10
+    },
+    {
+      "name": "barStep",
+      "update": "(width - nullGap) / (1 + binCount)"
+    }
+  ],
+
+  "data": [
+    {
+      "name": "table",
+      "url": "ScatterPlot_Histogram/drink_consumption.json",
+      "transform": [
+        {
+          "type": "extent", "field": "total_litres_of_pure_alcohol",
+          "signal": "extent"
+        },
+        {
+          "type": "bin", "signal": "bins",
+          "field": "total_litres_of_pure_alcohol", "extent": {"signal": "extent"}
+        }
+      ]
+    },
+    {
+      "name": "counts",
+      "source": "table",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum['total_litres_of_pure_alcohol'] != null"
+        },
+        {
+          "type": "aggregate",
+          "groupby": ["bin0", "bin1"]
+        }
+      ]
+    }
+  ],
+
+  "scales": [
+    {
+      "name": "y",
+      "type": "linear",
+      "range": "height",
+      "round": true, "nice": true,
+      "domain": {
+        "fields": [
+          {"data": "counts", "field": "count"}
+        ]
+      }
+    },
+    {
+      "name": "x",
+      "type": "linear",
+      "range": [{"signal": "barStep + nullGap"}, {"signal": "width"}],
+      "round": true,
+      "domain": {"signal": "[bins.start, bins.stop]"},
+      "bins": {"signal": "bins"}
+    }
+  ],
+
+  "axes": [
+    {
+      "scale": "x",
+      "grid": true,
+      "domain": false,
+      "orient": "bottom",
+      "titlePadding": 12,
+      "labelFontSize": 16,
+      "titleFontSize": 28,
+      "titleFontStyle": "normal",
+      "titleFontWeight": "lighter",
+      "title": "Liters of Pure Alcohol",
+      "titleOpacity": 0.6
+    },
+    {
+      "scale": "y",
+      "grid": true,
+      "domain": false,
+      "orient": "left",
+      "tickCount": 8,
+      "titlePadding": 12,
+      "labelFontSize": 16,
+      "titleFontSize": 28,
+      "titleFontStyle": "normal",
+      "titleFontWeight": "lighter",
+      "titleOpacity": 0.6,
+      "title": "Number of Countries"
+    }
+  ],
+
+  "marks": [
+    {
+      "type": "rect",
+      "from": {"data": "counts"},
+      "encode": {
+        "update": {
+          "x": {"scale": "x", "field": "bin0", "offset": 1},
+          "x2": {"scale": "x", "field": "bin1"},
+          "y": {"scale": "y", "field": "count"},
+          "y2": {"scale": "y", "value": 0},
+          "fill": {"value": "coral"}
+        },
+        "hover": {
+          "fill": {"value": "darkturquoise"}
+        }
+      }
+    }
+  ]
+}

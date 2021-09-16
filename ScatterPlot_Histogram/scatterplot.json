@@ -1,0 +1,87 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "description": "A basic scatter plot example depicting automobile statistics.",
+  "width": 400,
+  "height": 400,
+  "padding": 5,
+
+  "data": [
+    {
+      "name": "source",
+      "url": "ScatterPlot_Histogram/drink_consumption.json",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum['beer_servings'] != null && datum['wine_servings'] != null"
+        }
+      ]
+    }
+  ],
+
+  "scales": [
+    {
+      "name": "x",
+      "type": "linear",
+      "round": true,
+      "nice": true,
+      "zero": true,
+      "domain": {"data": "source", "field": "beer_servings"},
+      "range": "width"
+    },
+    {
+      "name": "y",
+      "type": "linear",
+      "round": true,
+      "nice": true,
+      "zero": true,
+      "domain": {"data": "source", "field": "wine_servings"},
+      "range": "height"
+    }
+  ],
+
+  "axes": [
+    {
+      "scale": "x",
+      "grid": true,
+      "domain": false,
+      "orient": "bottom",
+      "tickCount": 5,
+      "titlePadding": 12,
+      "labelFontSize": 16,
+      "titleFontSize": 28,
+      "titleFontStyle": "normal",
+      "titleFontWeight": "lighter",
+      "title": "Beer Servings",
+      "titleOpacity": 0.6
+    },
+    {
+      "scale": "y",
+      "grid": true,
+      "domain": false,
+      "orient": "left",
+      "titlePadding": 12,
+      "labelFontSize": 16,
+      "titleFontSize": 28,
+      "titleFontStyle": "normal",
+      "titleFontWeight": "lighter",
+      "titleOpacity": 0.6,
+      "title": "Wine Servings"
+    }
+  ],
+
+  "marks": [
+    {
+      "name": "marks",
+      "type": "symbol",
+      "from": {"data": "source"},
+      "encode": {
+        "update": {
+          "x": {"scale": "x", "field": "beer_servings"},
+          "y": {"scale": "y", "field": "wine_servings"},
+          "shape": {"value": "square"},
+          "fill": {"value": "coral"}
+        }
+      }
+    }
+  ]
+}
