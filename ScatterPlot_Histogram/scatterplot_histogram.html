@@ -8,23 +8,46 @@
 <body>
     <a href="../index.html">Homepage</a>
     <br>
-    <br>
 
-<div id="vis1"></div>
-<script>
-    const spec1 = "scatterplot.json";
-    vegaEmbed("#vis1", spec1)
-        // result.view provides access to the Vega View API
-        .then(result => console.log(result))
-        .catch(console.warn);
-</script>
+    <pre style="font-size:20px"><b>Hypothesis: </b> If a country serves lots of one type of drink
+             then it will serve less of the other types
+             and make all countries total alcohol consumption relatively equal.</pre>
+    <hr>
 
-<div id="vis2"></div>
-<script>
-    const spec2 = "histogram.json";
-    vegaEmbed("#vis2", spec2)
-        // result.view provides access to the Vega View API
-        .then(result => console.log(result))
-        .catch(console.warn);
-</script>
+    <p>The following displays how many cans of beer, glasses of wine,
+        and shots of spirit, with respect to each other,
+        were drunk per person in each country in 2010.</p>
+
+    <div id="vis1"></div>
+    <script>
+        const spec1 = "scatterplot_BW.json";
+        vegaEmbed("#vis1", spec1)
+            // result.view provides access to the Vega View API
+            .then(result => console.log(result))
+            .catch(console.warn);
+    </script>
+
+    <div id="vis2"></div>
+    <script>
+        const spec2 = "scatterplot_BS.json";
+        vegaEmbed("#vis2", spec2)
+            // result.view provides access to the Vega View API
+            .then(result => console.log(result))
+            .catch(console.warn);
+    </script>
+    <br><br><br><br><br><br>
+
+    <p>The histogram is displaying how many liters of alcohol each country drinks</p>
+
+
+    <div id="vis7"></div>
+    <script>
+        const spec7 = "histogram.json";
+        vegaEmbed("#vis7", spec7)
+            // result.view provides access to the Vega View API
+            .then(result => console.log(result))
+            .catch(console.warn);
+    </script>
+
+    <p style="font-size:16px"><b>Data Reference:</b> https://github.com/fivethirtyeight/data/blob/master/alcohol-consumption/drinks.csv</p>
 </body>
