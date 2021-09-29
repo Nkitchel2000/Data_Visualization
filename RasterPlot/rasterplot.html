@@ -7,18 +7,28 @@
 
 <body>
 <a href="../index.html">Homepage</a>
-
-<br><br>
-
+<hr>
 
 <table>
     <tr>
         <td>
-            <h2>Hypothesis: </h2>
-            <p>when computing the values of X * Y they will increase as both alues get closer to 1 from -1</p>
-            <p>The figure on the right displays the function of X * Y from the values of -1 to 1</p>
-            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-            <br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+            <pre style="font-size:20px"><b>Hypothesis: </b> When computing X * Y the values produced will be &ensp;
+             changing at regular intervals because the values
+             are the same from negative one to one.</pre>
+            <br>
+            <p>In order to obtain the data in the way that I needed, python code was involved. <br>
+            The contents of that file that involve calculating data points is shown below.</p>
+
+            <pre style="font-size:16px"><i>import numpy as np
+x, y = np.meshgrid(np.linspace(-1, 1, 50), np.linspace(-1, 1, 50))
+z = x * y
+z -= z.mean()
+z /= z.std()</i></pre>
+
+            <p>This data is then converted to a html file that can be found in the data file.</p>
+
+            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
         </td>
         <td>
             <h2>&ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &nbsp; Function of  (X * Y)</h2>
@@ -34,5 +44,10 @@
         </script>
     </tr>
 </table>
+
+<P><b>Reference: </b> ......................................................
+............................................................................
+............................................................................
+............................................................................</P>
 
 </body>

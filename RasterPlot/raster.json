@@ -42,7 +42,7 @@
       "name": "color",
       "type": "linear",
       "domain": [-3, 3],
-      "range": {"scheme": "blueorange"}
+      "range": {"scheme": "purplegreen"}
     }
   ],
   "marks": [
@@ -51,7 +51,7 @@
       "from": {"data": "contours"},
       "encode": {
         "enter": {
-          "stroke": {"value": "#000"},
+          "stroke": {"value": "lightgrey"},
           "strokeWidth": {"value": 1},
           "fill": {"scale": "color", "field": "contour.value"}
         }
