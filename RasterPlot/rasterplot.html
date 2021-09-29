@@ -8,15 +8,31 @@
 <body>
 <a href="../index.html">Homepage</a>
 
-<br>
+<br><br>
 
-<div id="vis1"></div>
-<script>
-    const spec1 = "raster.json";
-    vegaEmbed("#vis1", spec1)
-        // result.view provides access to the Vega View API
-        .then(result => console.log(result))
-        .catch(console.warn);
-</script>
+
+<table>
+    <tr>
+        <td>
+            <h2>Hypothesis: </h2>
+            <p>when computing the values of X * Y they will increase as both alues get closer to 1 from -1</p>
+            <p>The figure on the right displays the function of X * Y from the values of -1 to 1</p>
+            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+            <br><br><br><br><br><br><br><br><br><br><br><br><br>
+        </td>
+        <td>
+            <h2>&ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &nbsp; Function of  (X * Y)</h2>
+            <div id="vis1"></div>
+        </td>
+
+        <script>
+            const spec1 = "raster.json";
+            vegaEmbed("#vis1", spec1)
+                // result.view provides access to the Vega View API
+                .then(result => console.log(result))
+                .catch(console.warn);
+        </script>
+    </tr>
+</table>
 
 </body>

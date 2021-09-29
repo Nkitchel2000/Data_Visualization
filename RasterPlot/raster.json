@@ -1,8 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega/v5.json",
   "description": "A contour plot of a mathematical function.",
-  "width": 500,
-  "autosize": "none",
+  "width": 600,
 
   "signals": [
     {
@@ -14,7 +13,7 @@
       "update": "round(grid.height * width / grid.width)"
     },
     {
-      "name": "smooth", "value": true,
+      "name": "Smooth: ", "value": true,
       "bind": {"input": "radio", "options": [true, false]}
     }
   ],
@@ -31,8 +30,8 @@
         {
           "type": "isocontour",
           "scale": {"expr": "width / datum.width"},
-          "smooth": {"signal": "smooth"},
-          "thresholds": {"signal": "sequence(-1, 1, .2)"}
+          "smooth": {"signal": "Smooth: "},
+          "thresholds": {"signal": "sequence(-1, 1, .12)"}
         }
       ]
     }
