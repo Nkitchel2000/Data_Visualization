@@ -17,15 +17,15 @@
       "bind": {"input": "radio", "options": [true, false]}
     },
     {
-      "name": "levels", "value": 10,
-      "bind": {"input": "range", "min": 6, "max": 16, "step": 1}
+      "name": "Levels", "value": 10,
+      "bind": {"input": "range", "min": 4, "max": 12, "step": 1}
     },
     {
-      "name": "stop", "value": 1
+      "name": "stop", "value": 2
     },
     {
       "name": "step",
-      "update": "stop / levels"
+      "update": "stop / Levels"
     }
   ],
 
@@ -42,7 +42,7 @@
           "type": "isocontour",
           "scale": {"expr": "width / datum.width"},
           "smooth": {"signal": "Smooth: "},
-          "thresholds": {"signal": "sequence(-1, stop, step)"}
+          "thresholds": {"signal": "sequence(-4, stop, step)"}
         }
       ]
     }
@@ -53,7 +53,7 @@
       "name": "color",
       "type": "linear",
       "domain": {"signal": "[-2, stop]"},
-      "range": {"scheme": "purplegreen", "count": {"signal": "levels"}}
+      "range": {"scheme": "purplegreen", "count": {"signal": "Levels"}}
     }
   ],
   "marks": [

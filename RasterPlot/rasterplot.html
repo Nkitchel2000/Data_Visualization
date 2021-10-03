@@ -22,16 +22,18 @@
 
             <pre style="font-size:16px"><i>import numpy as np
 x, y = np.meshgrid(np.linspace(-1, 1, 50), np.linspace(-1, 1, 50))
-z = x * y
+z = (x*x*x) + (y*y*y)
 z -= z.mean()
 z /= z.std()</i></pre>
 
-            <p>This data is then converted to a html file that can be found in the data file.</p>
+            <img src="Graph of Raster Data.png" alt="Graph of Raster Data">
+            <p>This is saying that compared to the graph, most of the data points are at the edges and when it jumps
+            between them there aren't very many data points, maybe one point between the low and high peak.</p>
+            Display the graph as well.
 
-            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
         </td>
         <td>
-            <h2>&ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &nbsp; Function of  (X * Y)</h2>
+            <h2>&ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &nbsp; Function of (X^3 * Y^3)</h2>
             <div id="vis1"></div>
         </td>
 
