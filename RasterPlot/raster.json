@@ -41,7 +41,7 @@
     {
       "name": "color",
       "type": "linear",
-      "domain": [-3, 3],
+      "domain": [-2, 2],
       "range": {"scheme": "purplegreen"}
     }
   ],
