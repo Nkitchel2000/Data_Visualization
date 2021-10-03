@@ -15,6 +15,17 @@
     {
       "name": "Smooth: ", "value": true,
       "bind": {"input": "radio", "options": [true, false]}
+    },
+    {
+      "name": "levels", "value": 10,
+      "bind": {"input": "range", "min": 6, "max": 16, "step": 1}
+    },
+    {
+      "name": "stop", "value": 1
+    },
+    {
+      "name": "step",
+      "update": "stop / levels"
     }
   ],
 
@@ -31,7 +42,7 @@
           "type": "isocontour",
           "scale": {"expr": "width / datum.width"},
           "smooth": {"signal": "Smooth: "},
-          "thresholds": {"signal": "sequence(-1, 1, .12)"}
+          "thresholds": {"signal": "sequence(-1, stop, step)"}
         }
       ]
     }
@@ -41,8 +52,8 @@
     {
       "name": "color",
       "type": "linear",
-      "domain": [-2, 2],
-      "range": {"scheme": "purplegreen"}
+      "domain": {"signal": "[-2, stop]"},
+      "range": {"scheme": "purplegreen", "count": {"signal": "levels"}}
     }
   ],
   "marks": [
