@@ -1,0 +1,96 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "width": 500,
+  "height": 150 ,
+
+  "signals": [
+    {
+      "name": "Opacity", "value": 1,
+      "bind": {"input": "range", "min": 0, "max": 1, "step": 0.01}
+    },
+    {
+      "name": "Levels", "value": 6,
+      "bind": {"input": "range", "min": 2, "max": 12, "step": 1}
+    },
+    {
+      "name": "stop", "value": 2250
+    },
+    {
+      "name": "step",
+      "update": "stop / Levels"
+    }
+  ],
+
+  "data": [
+    {
+      "name": "precip",
+      "url": "local.json"
+    },
+    {
+      "name": "contours",
+      "source": "precip",
+      "transform": [
+        {
+          "type": "isocontour",
+          "thresholds": {"signal": "sequence(0, stop, step)"}
+        }
+      ]
+    }
+  ],
+
+  "projections": [
+    {
+      "name": "projection",
+      "type": "albersUsa"
+    }
+  ],
+
+  "scales": [
+    {
+      "name": "color",
+      "type": "quantize",
+      "domain": {"signal": "[0, stop]"},
+      "range": {"scheme": "orangered", "count": {"signal": "Levels"}}
+    }
+  ],
+
+  "marks": [
+    {
+      "type": "shape",
+      "from": { "data": "contours"},
+      "encode": {
+        "update": {
+          "fill": {"scale": "color", "field": "contour.value"},
+          "fillOpacity": {"signal": "Opacity"}
+        }
+      },
+      "transform": [
+        {
+          "type": "geoshape",
+          "field": "datum.contour",
+          "projection": "projection"
+        }
+      ]
+    }
+  ],
+
+  "legends": [
+    {
+      "title": "Average Precipitation (mm)",
+      "fill": "color",
+      "orient": "bottom",
+      "offset": 1,
+      "type": "gradient",
+      "gradientLength": 300,
+      "gradientThickness": 12,
+      "titlePadding": 10,
+      "titleOrient": "left",
+      "titleAnchor": "end",
+      "direction": "horizontal"
+    }
+  ],
+
+  "config": {
+    "legend": {"layout": {"anchor": "middle"}}
+  }
+}

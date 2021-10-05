@@ -13,32 +13,26 @@
     <tr>
         <td>
 
-            <pre style="font-size:20px"><b>Hypothesis: </b> When computing X * Y the values produced will be &ensp;
-             changing at regular intervals because the values
-             are the same from negative one to one.</pre>
+            <pre style="font-size:20px"><b>Hypothesis: </b> The amount of rain that falls in Montana
+            will increase as we move west across the state
+            because of the mountains through western Montana.</pre>
             <br>
             <p>In order to obtain the data in the way that I needed, python code was involved. <br>
-            The contents of that file that involve calculating data points is shown below.</p>
+            The contents of that file that involve converting the data points is shown below.</p>
 
-            <pre style="font-size:16px"><i>import numpy as np
-x, y = np.meshgrid(np.linspace(-1, 1, 50), np.linspace(-1, 1, 50))
-z = (x*x*x) + (y*y*y)
-z -= z.mean()
-z /= z.std()</i></pre>
-
-            <img src="Graph of Raster Data.png" alt="Graph of Raster Data">
-            <p>This is saying that compared to the graph, most of the data points are at the edges and when it jumps
-            between them there aren't very many data points, maybe one point between the low and high peak.</p>
-            Display the graph as well.
+            <p>
+                <i>raster = rasterio.open('annual_sum_precipitation_mm_2000.tif')<br>
+                band_arr = raster.read(band_id)</i>
+            </p>
 
         </td>
         <td>
-            <h2>&ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &nbsp; Function of (X^3 * Y^3)</h2>
+            <h2>&ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; Precipitation in Montana (2000)</h2>
             <div id="vis1"></div>
         </td>
 
         <script>
-            const spec1 = "raster.json";
+            const spec1 = "build_map.json";
             vegaEmbed("#vis1", spec1)
                 // result.view provides access to the Vega View API
                 .then(result => console.log(result))
@@ -47,9 +41,6 @@ z /= z.std()</i></pre>
     </tr>
 </table>
 
-<P><b>Reference: </b> ......................................................
-............................................................................
-............................................................................
-............................................................................</P>
+<P><b>Reference: </b> https://mco.cfc.umt.edu/datasets/data/climate/precipitation/annual_precipitation/</P>
 
 </body>
