@@ -94,8 +94,8 @@
     {
       "name": "color",
       "type": "quantize",
-      "domain": [0, 20],
-      "range": {"scheme": "category10","count": 5}
+      "domain": {"data": "polis", "field": {"signal": "ColorAs"}},
+      "range": "category"
     }
   ],
 

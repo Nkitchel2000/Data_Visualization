@@ -1,0 +1,88 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "description": "A basic scatter plot example depicting automobile statistics.",
+  "width": 400,
+  "height": 400,
+  "padding": 5,
+
+  "data": [
+    {
+      "name": "source",
+      "url": "data/polis_filtered_data.json",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum['prom 1'] != null && datum['area 1'] != null"
+        }
+      ]
+    }
+  ],
+
+  "scales": [
+    {
+      "name": "x",
+      "type": "linear",
+      "round": true,
+      "nice": true,
+      "zero": true,
+      "domain": {"data": "source", "field": "prom 1"},
+      "range": "width"
+    },
+    {
+      "name": "y",
+      "type": "linear",
+      "round": true,
+      "nice": true,
+      "zero": true,
+      "domain": {"data": "source", "field": "area 1"},
+      "range": "height"
+    }
+  ],
+
+  "axes": [
+    {
+      "scale": "x",
+      "grid": true,
+      "domain": false,
+      "orient": "bottom",
+      "tickCount": 5,
+      "titlePadding": 12,
+      "labelFontSize": 16,
+      "titleFontSize": 28,
+      "titleFontStyle": "normal",
+      "titleFontWeight": "lighter",
+      "title": "prom 1",
+      "titleOpacity": 0.6
+    },
+    {
+      "scale": "y",
+      "grid": true,
+      "domain": false,
+      "orient": "left",
+      "titlePadding": 12,
+      "labelFontSize": 16,
+      "titleFontSize": 28,
+      "titleFontStyle": "normal",
+      "titleFontWeight": "lighter",
+      "titleOpacity": 0.6,
+      "title": "area 1"
+    }
+  ],
+
+  "marks": [
+    {
+      "name": "marks",
+      "type": "symbol",
+      "from": {"data": "source"},
+      "encode": {
+        "update": {
+          "x": {"scale": "x", "field": "prom 1"},
+          "y": {"scale": "y", "field": "area 1"},
+          "shape": {"value": "square"},
+          "fill": {"value": "coral"}
+        }
+      }
+    }
+  ]
+}
+

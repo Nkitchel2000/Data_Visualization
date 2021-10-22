@@ -58,7 +58,9 @@
     {
       "name": "graticule",
       "transform": [
-        { "type": "graticule" }
+        { "type": "graticule",
+          "expr": "datum[Color Attributes] != null"
+        }
       ]
     },
     {
@@ -91,7 +93,8 @@
   "scales": [
     {
       "name": "color",
-      "type": "linear"
+      "type": "linear",
+      "domain": {"data": "source", "field": {"signal": "Color Attribute"}}
     }
   ],
 
