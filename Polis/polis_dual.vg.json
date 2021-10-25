@@ -101,16 +101,10 @@
   },
   "scales": [
     {
-      "name": "color",
-      "type": "quantize",
-      "domain": [0, 20],
-      "range": {"scheme": "category10","count": 5}
-    },
-    {
       "name": "color2",
       "type": "quantize",
       "domain": {"data": "pulldown", "field": "pulldown"},
-      "range": {"scheme": "category10","count": 5}
+      "range": {"scheme": "set1", "count": 5}
     }
   ],
   "marks": [
@@ -169,6 +163,21 @@
             { "type": "geoshape", "projection": "projection" }
           ]
         },
+
+        {
+          "type": "shape",
+          "from": {"data": "rivers"},
+          "clip": {"sphere": "projection"},
+          "encode": {
+            "enter": {
+              "strokeWidth": {"value": 0.2},
+              "stroke": {"value": "blue"}
+            }
+          },
+          "transform": [
+            { "type": "geoshape", "projection": "projection" }
+          ]
+        },
         {
           "type": "shape",
           "from": {"data": "graticule"},
@@ -198,24 +207,6 @@
               "type": "geoshape",
               "projection": "projection",
               "pointRadius":2
-            }
-          ]
-        },
-        {
-          "type": "shape",
-          "from": {"data": "polis_no"},
-          "encode": {
-            "update": {
-              "opacity": {"value": 0.4},
-              "fill": {"value": "black"}
-
-            }
-          },
-          "transform": [
-            {
-              "type": "geoshape",
-              "projection": "projection",
-              "pointRadius":0.75
             }
           ]
         },
