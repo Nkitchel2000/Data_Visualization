@@ -9,8 +9,8 @@
     { "name": "projScale", "value": 45},
     { "name": "projTranslate", "update": "[mapWidth / 2, mapHeight / 2]" },
     {
-      "name": "ColorAs",
-      "value": "staseis",
+      "name": "Type",
+      "value": "Bronze",
       "bind": {
         "input": "select",
         "options": ["Bronze",
@@ -82,7 +82,7 @@
         "type": "json",
         "property": "features"
       },
-      "transform": [{"type":"filter","expr":"datum.properties[ColorAs] > 0"}]
+      "transform": [{"type":"filter","expr":"datum.properties[Type] > 0"}]
     },
     {
       "name": "pulldown",
@@ -91,7 +91,7 @@
         "type": "json",
         "property": "features"
       },
-      "transform": [{"type":"formula","as":"pulldown","expr":"datum.properties[ColorAs] > 0 ? datum.properties[ColorAs] : null"}]
+      "transform": [{"type":"formula","as":"pulldown","expr":"datum.properties[Type] > 0 ? datum.properties[Type] : null"}]
     }
   ],
 
@@ -101,7 +101,7 @@
   },
   "scales": [
     {
-      "name": "color2",
+      "name": "color",
       "type": "quantize",
       "domain": {"data": "pulldown", "field": "pulldown"},
       "range": {"scheme": "set1", "count": 5}
@@ -199,7 +199,7 @@
           "encode": {
             "update": {
               "opacity": {"value": 1},
-              "fill": {"scale": "color2", "field": "pulldown"}
+              "fill": {"scale": "color", "field": "pulldown"}
             }
           },
           "transform": [
@@ -246,8 +246,8 @@
   ],
   "legends": [
     {
-      "title": {"signal": "ColorAs"},
-      "fill": "color2",
+      "title": {"signal": "Type"},
+      "fill": "color",
       "orient": "bottom",
       "offset": 5,
       "type": "gradient",
