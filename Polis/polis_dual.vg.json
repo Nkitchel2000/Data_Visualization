@@ -10,7 +10,7 @@
     { "name": "projTranslate", "update": "[mapWidth / 2, mapHeight / 2]" },
     {
       "name": "Type",
-      "value": "Bronze",
+      "value": "Elevation m",
       "bind": {
         "input": "select",
         "options": ["Bronze",

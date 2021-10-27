@@ -7,7 +7,7 @@
   "signals": [
     {
       "name": "X_axis",
-      "value": "prom 1",
+      "value": "Elevation m",
       "bind": {
         "input": "select",
         "options": ["Bronze",
@@ -37,7 +37,7 @@
     },
     {
       "name": "Y_axis",
-      "value": "Colonies",
+      "value": "staseis",
       "bind": {
         "input": "select",
         "options": ["Bronze",
