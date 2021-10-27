@@ -108,7 +108,7 @@
       "from": {"data": "counts"},
       "encode": {
         "update": {
-          "x": {"scale": "x", "field": "bin0", "offset": 1},
+          "x": {"scale": "x", "field": "bin0", "offset": 0},
           "x2": {"scale": "x", "field": "bin1"},
           "y": {"scale": "y", "field": "count"},
           "y2": {"scale": "y", "value": 0},

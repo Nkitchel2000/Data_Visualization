@@ -1,0 +1,319 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "description": "Estimating the value of π via random sampling methods.",
+  "autosize": "pad",
+  "padding": 5,
+  "height": 380,
+
+  "signals": [
+    {
+      "name": "binCount",
+      "update": "(bins.stop - bins.start) / bins.step"
+    },
+    {
+      "name": "nullGap",
+      "value": 1
+    },
+    {
+      "name": "barStep",
+      "update": "(width - nullGap) / (1 + binCount)"
+    },
+    {
+      "name": "Type",
+      "value": "Region #",
+      "bind": {
+        "input": "select",
+        "options": [
+          "Bronze",
+          "Colonies",
+          "Delian L",
+          "Democracy",
+          "Elevation m",
+          "Grid",
+          "Hellenicity",
+          "In/out",
+          "Koinon",
+          "Polisity",
+          "Proxenoi",
+          "Region #",
+          "Silver",
+          "Victors",
+          "Walls",
+          "area 1",
+          "area 2",
+          "polis#",
+          "prom 1",
+          "prom 2",
+          "prom 3",
+          "staseis"
+        ]
+      }
+    },
+    {
+      "name": "Type2",
+      "value": "Colonies",
+      "bind": {
+        "input": "select",
+        "options": [
+          "Bronze",
+          "Colonies",
+          "Delian L",
+          "Democracy",
+          "Elevation m",
+          "Grid",
+          "Hellenicity",
+          "In/out",
+          "Koinon",
+          "Polisity",
+          "Proxenoi",
+          "Region #",
+          "Silver",
+          "Victors",
+          "Walls",
+          "area 1",
+          "area 2",
+          "polis#",
+          "prom 1",
+          "prom 2",
+          "prom 3",
+          "staseis"
+        ]
+      }
+    }
+  ],
+  "data": [
+    {
+      "name": "source",
+      "url": "data/polis_filtered_data.json",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum[Type] != null && datum[Type2] != null"
+        }
+      ]
+    },
+    {
+      "name": "table",
+      "url": "data/polis_filtered_data.json",
+      "transform": [
+        {
+          "type": "extent",
+          "field": {
+            "signal": "Type"
+          },
+          "signal": "extent"
+        },
+        {
+          "type": "bin",
+          "signal": "bins",
+          "field": {
+            "signal": "Type"
+          },
+          "extent": {
+            "signal": "extent"
+          }
+        }
+      ]
+    },
+    {
+      "name": "counts",
+      "source": "table",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum[Type] > 0"
+        },
+        {
+          "type": "aggregate",
+          "groupby": [
+            "bin0",
+            "bin1"
+          ]
+        }
+      ]
+    }
+  ],
+
+  "layout": {
+    "padding": 70,
+    "bounds": "flush",
+    "align": "none"
+  },
+
+  "marks": [
+    {
+      "type": "group",
+      "style": "cell",
+      "title": {
+        "text": "Scatter Plot",
+        "frame": "group"
+      },
+      "encode": {
+        "update": {
+          "width": {
+            "signal": "height"
+          },
+          "height": {
+            "signal": "height"
+          }
+        }
+      },
+      "marks": [
+        {
+          "name": "marks",
+          "type": "symbol",
+          "from": {
+            "data": "source"
+          },
+          "encode": {
+            "update": {
+              "x": {
+                "scale": "x",
+                "field": {
+                  "signal": "Type"
+                }
+              },
+              "y": {
+                "scale": "y",
+                "field": {
+                  "signal": "Type2"
+                }
+              },
+              "shape": {
+                "value": "square"
+              },
+              "fill": {
+                "value": "coral"
+              }
+            }
+          }
+        }
+      ],
+      "axes": [
+        {
+          "scale": "x2",
+          "grid": true,
+          "domain": false,
+          "orient": "bottom",
+          "tickCount": 5,
+          "titlePadding": 12,
+          "labelFontSize": 16,
+          "titleFontSize": 28,
+          "titleFontStyle": "normal",
+          "titleFontWeight": "lighter",
+          "title": {
+            "signal": "Type"
+          },
+          "titleOpacity": 0.6
+        },
+        {
+          "scale": "y2",
+          "grid": true,
+          "domain": false,
+          "orient": "left",
+          "titlePadding": 12,
+          "labelFontSize": 16,
+          "titleFontSize": 28,
+          "titleFontStyle": "normal",
+          "titleFontWeight": "lighter",
+          "titleOpacity": 0.6,
+          "title": {
+            "signal": "Type2"
+          }
+        }
+      ]
+    },
+    {
+      "type": "group",
+      "name": "concat_1_group",
+      "style": "cell",
+      "title": {
+        "text": "Histogram",
+        "frame": "group"
+      },
+      "encode": {
+        "update": {
+          "width": {
+            "signal": "height"
+          },
+          "height": {
+            "signal": "height"
+          }
+        }
+      },
+      "marks": [
+        {
+          "type": "rect",
+          "from": {"data": "counts"},
+          "encode": {
+            "update": {
+              "x": {"scale": "x", "field": "bin0", "offset": 1},
+              "x2": {"scale": "x", "field": "bin1"},
+              "y": {"scale": "y", "field": "count"},
+              "y2": {"scale": "y", "value": 0},
+              "fill": {"value": "coral"}
+            },
+            "hover": {
+              "fill": {"value": "darkturquoise"}
+            }
+          }
+        }
+      ],
+      "axes": [
+        {
+          "scale": "x",
+          "orient": "bottom",
+          "title": {"signal": "Type"},
+          "labelFlush": true,
+          "labelOverlap": true,
+          "zindex": 1
+        },
+        {
+          "scale": "y",
+          "orient": "left",
+          "title": "Number of stuff",
+          "labelFlush": true,
+          "labelOverlap": true,
+          "zindex": 1
+        }
+      ]
+    }
+  ],
+  "scales": [
+    {
+      "name": "y",
+      "type": "linear",
+      "range": "height",
+      "round": true, "nice": true,
+      "domain": {
+        "fields": [
+          {"data": "counts", "field": "count"}
+        ]
+      }
+    },
+    {
+      "name": "x",
+      "type": "linear",
+      "range": [{"signal": "barStep + nullGap"}, {"signal": "width"}],
+      "round": true,
+      "domain": {"signal": "[bins.start, bins.stop]"},
+      "bins": {"signal": "bins"}
+    }
+  ]
+}
+
+
+
+{
+  "type": "rect",
+  "from": {"data": "counts"},
+  "encode": {
+    "update": {
+      "x": {"scale": "x_hist", "field": "bin0", "offset": 1},
+      "x2": {"scale": "x_hist", "field": "bin1"},
+      "y": {"scale": "y_hist", "field": "count"},
+      "y2": {"scale": "y_hist", "value": 0},
+      "fill": {"value": "coral"}
+    }
+  }
+}

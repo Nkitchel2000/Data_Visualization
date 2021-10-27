@@ -1,24 +1,43 @@
 {
   "$schema": "https://vega.github.io/schema/vega/v5.json",
-  "description": "A histogram of film ratings, modified to include null values.",
+  "description": "A basic scatter plot example depicting automobile statistics.",
   "width": 400,
   "height": 400,
 
   "signals": [
     {
-      "name": "binCount",
-      "update": "(bins.stop - bins.start) / bins.step"
+      "name": "X_axis",
+      "value": "prom 1",
+      "bind": {
+        "input": "select",
+        "options": ["Bronze",
+          "Colonies",
+          "Delian L",
+          "Democracy",
+          "Elevation m",
+          "Grid",
+          "Hellenicity",
+          "In/out",
+          "Koinon",
+          "Polisity",
+          "Proxenoi",
+          "Region #",
+          "Silver",
+          "Victors",
+          "Walls",
+          "area 1",
+          "area 2",
+          "polis#",
+          "prom 1",
+          "prom 2",
+          "prom 3",
+          "staseis"
+        ]
+      }
     },
     {
-      "name": "nullGap", "value": 1
-    },
-    {
-      "name": "barStep",
-      "update": "(width - nullGap) / (1 + binCount)"
-    },
-    {
-      "name": "Catagory",
-      "value": "Region #",
+      "name": "Y_axis",
+      "value": "Colonies",
       "bind": {
         "input": "select",
         "options": ["Bronze",
@@ -50,30 +69,12 @@
 
   "data": [
     {
-      "name": "table",
+      "name": "source",
       "url": "data/polis_filtered_data.json",
       "transform": [
         {
-          "type": "extent", "field": {"signal": "Catagory"},
-          "signal": "extent"
-        },
-        {
-          "type": "bin", "signal": "bins",
-          "field": {"signal": "Catagory"}, "extent": {"signal": "extent"}
-        }
-      ]
-    },
-    {
-      "name": "counts",
-      "source": "table",
-      "transform": [
-        {
           "type": "filter",
-          "expr": "datum[Catagory] > 0"
-        },
-        {
-          "type": "aggregate",
-          "groupby": ["bin0", "bin1"]
+          "expr": "datum[X_axis] != null && datum[Y_axis] != null"
         }
       ]
     }
@@ -81,23 +82,22 @@
 
   "scales": [
     {
-      "name": "y",
-      "type": "linear",
-      "range": "height",
-      "round": true, "nice": true,
-      "domain": {
-        "fields": [
-          {"data": "counts", "field": "count"}
-        ]
-      }
-    },
-    {
       "name": "x",
       "type": "linear",
-      "range": [{"signal": "barStep + nullGap"}, {"signal": "width"}],
       "round": true,
-      "domain": {"signal": "[bins.start, bins.stop]"},
-      "bins": {"signal": "bins"}
+      "nice": true,
+      "zero": true,
+      "domain": {"data": "source", "field": {"signal": "X_axis"}},
+      "range": "width"
+    },
+    {
+      "name": "y",
+      "type": "linear",
+      "round": true,
+      "nice": true,
+      "zero": true,
+      "domain": {"data": "source", "field": {"signal": "Y_axis"}},
+      "range": "height"
     }
   ],
 
@@ -107,12 +107,13 @@
       "grid": true,
       "domain": false,
       "orient": "bottom",
+      "tickCount": 5,
       "titlePadding": 12,
       "labelFontSize": 16,
       "titleFontSize": 28,
       "titleFontStyle": "normal",
       "titleFontWeight": "lighter",
-      "title": {"signal":  "Catagory"},
+      "title": {"signal": "X_axis"},
       "titleOpacity": 0.6
     },
     {
@@ -120,27 +121,26 @@
       "grid": true,
       "domain": false,
       "orient": "left",
-      "tickCount": 8,
       "titlePadding": 12,
       "labelFontSize": 16,
       "titleFontSize": 28,
       "titleFontStyle": "normal",
       "titleFontWeight": "lighter",
       "titleOpacity": 0.6,
-      "title": "Number for given Catagory"
+      "title": {"signal": "Y_axis"}
     }
   ],
 
   "marks": [
     {
-      "type": "rect",
-      "from": {"data": "counts"},
+      "name": "marks",
+      "type": "symbol",
+      "from": {"data": "source"},
       "encode": {
         "update": {
-          "x": {"scale": "x", "field": "bin0", "offset": 1},
-          "x2": {"scale": "x", "field": "bin1"},
-          "y": {"scale": "y", "field": "count"},
-          "y2": {"scale": "y", "value": 1},
+          "x": {"scale": "x", "field": {"signal": "X_axis"}},
+          "y": {"scale": "y", "field": {"signal": "Y_axis"}},
+          "shape": {"value": "square"},
           "fill": {"value": "#377eb8"}
         }
       }
