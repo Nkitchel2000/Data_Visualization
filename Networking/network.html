@@ -12,4 +12,14 @@
 <a href="../index.html">Homepage</a>
 <hr>
 </body>
+
+<div id="vis1"></div>
+<script>
+    const visual = "force_directed.json";
+    vegaEmbed("#vis1", visual)
+        .then(result => console.log(result))
+        .catch(console.warn);
+
+</script>
+
 </html>
