@@ -14,12 +14,19 @@
 </body>
 
 <div id="vis1"></div>
+<div id="vis2"></div>
+
 <script>
-    const visual = "force_directed.json";
-    vegaEmbed("#vis1", visual)
+    const visual1 = "force_directed_rand1.json";
+    vegaEmbed("#vis1", visual1)
         .then(result => console.log(result))
         .catch(console.warn);
-
 </script>
 
+<script>
+    const visual2 = "force_directed_a-z.json";
+    vegaEmbed("#vis2", visual2)
+        .then(result => console.log(result))
+        .catch(console.warn);
+</script>
 </html>

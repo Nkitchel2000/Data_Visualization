@@ -36,7 +36,7 @@
   "data": [
     {
       "name": "nodes",
-      "url": "data/data.json",
+      "url": "data/data_a-z.json",
       "format": {"type": "json", "property": "nodes"},
       "transform": [
         {
@@ -55,7 +55,7 @@
     },
     {
       "name": "edges",
-      "url": "data/data.json",
+      "url": "data/data_a-z.json",
       "format": {"type": "json", "property": "links"},
       "transform": [
         {
