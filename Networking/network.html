@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
     <meta charset="UTF-8">
     <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
@@ -11,22 +9,33 @@
 <body>
 <a href="../index.html">Homepage</a>
 <hr>
-</body>
 
-<div id="vis1"></div>
-<div id="vis2"></div>
+<p style="font-size:24px"><b>Hypothesis: </b> If the elevation of a given polis is low, then staseis will occur more often than at higher elevations.</p>
+
+<table>
+    <tr>
+        <td>
+            <p>Explain what the data is: the data represnets dolhpins social interactsing.</p>
+            <p>Mention the use of a python probram go convert data to json file format</p>
+            <div id="vis2"></div>
+        </td>
+        <td><div id="vis1"></div></td>
+    </tr>
+</table>
+
+<p>Reference: www.asdfasdfasfasdfasdfasssssssssssssssssa.com/d/asdf//asdfadfas l;jdfa;sdlfj</p>
 
 <script>
-    const visual1 = "force_directed_rand1.json";
-    vegaEmbed("#vis1", visual1)
-        .then(result => console.log(result))
-        .catch(console.warn);
-</script>
-
-<script>
-    const visual2 = "force_directed_a-z.json";
+    const visual2 = "circle_chaos.json";
     vegaEmbed("#vis2", visual2)
         .then(result => console.log(result))
         .catch(console.warn);
 </script>
-</html>
+
+<script>
+    const visual1 = "force_directed_a-z.json";
+    vegaEmbed("#vis1", visual1)
+        .then(result => console.log(result))
+        .catch(console.warn);
+</script>
+</body>4

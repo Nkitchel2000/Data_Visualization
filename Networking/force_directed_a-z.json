@@ -30,13 +30,24 @@
         },
         {"events": "window:mouseup", "update": "-1"}
       ]
+    },
+    {
+      "name": "url",
+      "value": "data/data_a-z.json",
+      "bind": {
+        "input": "select",
+        "options": [
+          "data/data_a-z.json",
+          "data/data_rand1.json"
+        ]
+      }
     }
   ],
 
   "data": [
     {
       "name": "nodes",
-      "url": "data/data_a-z.json",
+      "url": {"signal": "url"},
       "format": {"type": "json", "property": "nodes"},
       "transform": [
         {
