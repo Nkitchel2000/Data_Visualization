@@ -12,7 +12,9 @@
         "input": "select",
         "options": [
           "data/data_a-z.json",
-          "data/data_rand1.json"
+          "data/data_rand1.json",
+          "data/data_rand2.json",
+          "data/data_rand3.json"
         ]
       }
     }
@@ -61,6 +63,11 @@
       ]
     }
   ],
+  "layout": {
+    "padding": 70,
+    "bounds": "flush",
+    "align": "none"
+  },
 
   "scales": [
     {

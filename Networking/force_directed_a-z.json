@@ -38,7 +38,9 @@
         "input": "select",
         "options": [
           "data/data_a-z.json",
-          "data/data_rand1.json"
+          "data/data_rand1.json",
+          "data/data_rand2.json",
+          "data/data_rand3.json"
         ]
       }
     }
@@ -46,7 +48,7 @@
 
   "data": [
     {
-      "name": "nodes",
+      "name": "nodes_box",
       "url": {"signal": "url"},
       "format": {"type": "json", "property": "nodes"},
       "transform": [
@@ -65,12 +67,12 @@
       ]
     },
     {
-      "name": "edges",
+      "name": "edges_box",
       "url": "data/data_a-z.json",
       "format": {"type": "json", "property": "links"},
       "transform": [
         {
-          "type": "lookup", "from": "nodes", "key": "index",
+          "type": "lookup", "from": "nodes_box", "key": "index",
           "fields": ["source", "target"], "as": ["sourceNode", "targetNode"]
         },
         {
@@ -81,7 +83,7 @@
     },
     {
       "name": "cross",
-      "source": "nodes",
+      "source": "nodes_box",
       "transform": [
         { "type": "cross" }
       ]
@@ -92,7 +94,7 @@
     {
       "name": "position",
       "type": "band",
-      "domain": {"data": "nodes", "field": "order", "sort": true},
+      "domain": {"data": "nodes_box", "field": "order", "sort": true},
       "range": {"step": {"signal": "cellSize"}}
     },
     {
@@ -101,7 +103,7 @@
       "range": "category",
       "domain": {
         "fields": [
-          {"data": "nodes", "field": "group"},
+          {"data": "nodes_box", "field": "group"},
           {"signal": "count"}
         ],
         "sort": true
@@ -128,7 +130,7 @@
     },
     {
       "type": "rect",
-      "from": {"data": "edges"},
+      "from": {"data": "edges_box"},
       "encode": {
         "update": {
           "x": {"scale": "position", "field": "sourceNode.order"},
@@ -141,7 +143,7 @@
     },
     {
       "type": "rect",
-      "from": {"data": "edges"},
+      "from": {"data": "edges_box"},
       "encode": {
         "update": {
           "x": {"scale": "position", "field": "targetNode.order"},
@@ -155,7 +157,7 @@
     {
       "type": "text",
       "name": "columns",
-      "from": {"data": "nodes"},
+      "from": {"data": "nodes_box"},
       "encode": {
         "update": {
           "x": {"scale": "position", "field": "order", "band": 0.5},
@@ -175,7 +177,7 @@
     {
       "type": "text",
       "name": "rows",
-      "from": {"data": "nodes"},
+      "from": {"data": "nodes_box"},
       "encode": {
         "update": {
           "x": {"offset": -2},
