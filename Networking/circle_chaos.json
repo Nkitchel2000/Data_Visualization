@@ -96,8 +96,8 @@
         },
         "update": {
           "x": {"scale": "position", "field": "order"},
-          "y": {"value": 0},
-          "size": {"field": "degree", "mult": 5, "offset": 10},
+          "y": {"value": 4},
+          "size": {"field": "degree", "mult": 5, "offset": 2},
           "fill": {"scale": "color", "field": "group"}
         }
       }
@@ -146,8 +146,8 @@
       "encode": {
         "update": {
           "x": {"scale": "position", "field": "order"},
-          "y": {"value": 7},
-          "fontSize": {"value": 9},
+          "y": {"value": 10},
+          "fontSize": {"value": 11},
           "align": {"value": "right"},
           "baseline": {"value": "middle"},
           "angle": {"value": -90},

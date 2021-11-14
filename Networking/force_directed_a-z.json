@@ -148,11 +148,11 @@
       "encode": {
         "update": {
           "x": {"scale": "position", "field": "order", "band": 0.5},
-          "y": {"offset": -2},
+          "y": {"offset": 622},
           "text": {"field": "name"},
           "fontSize": {"value": 10},
           "angle": {"value": -90},
-          "align": {"value": "left"},
+          "align": {"value": "right"},
           "baseline": {"value": "middle"},
           "fill": [
             {"test": "datum === src", "value": "steelblue"},
@@ -167,7 +167,7 @@
       "from": {"data": "nodes_box"},
       "encode": {
         "update": {
-          "x": {"offset": -2},
+          "x": {"offset": -4},
           "y": {"scale": "position", "field": "order", "band": 0.5},
           "text": {"field": "name"},
           "fontSize": {"value": 10},
